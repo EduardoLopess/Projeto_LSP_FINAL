@@ -1,0 +1,11 @@
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\bin\Debug\net7.0\Domain.deps.json
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\bin\Debug\net7.0\Domain.dll
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\bin\Debug\net7.0\Domain.pdb
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\Domain.AssemblyInfoInputs.cache
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\Domain.AssemblyInfo.cs
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\Domain.dll
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\refint\Domain.dll
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\Domain.pdb
+C:\Users\Edu\Desktop\Projeto - LSP\back_end\Domain\obj\Debug\net7.0\ref\Domain.dll
