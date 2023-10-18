@@ -17,172 +17,181 @@ namespace Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
-            modelBuilder.Entity("Domain.Entities.Endereco", b =>
+            modelBuilder.Entity("AddressUser", b =>
+                {
+                    b.Property<int>("AddressesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AddressesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("AddressUser");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("Id");
-
-                    b.Property<string>("Bairro")
-                        .HasMaxLength(255)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Bairro");
-
-                    b.Property<int>("Cep")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("Cep");
-
-                    b.Property<string>("Cidade")
-                        .HasMaxLength(255)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Cidade");
-
-                    b.Property<string>("Complemento")
-                        .HasMaxLength(255)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Complemento");
-
-                    b.Property<int>("InstitutoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Logradouro")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Logradouro");
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("NumeroCasa")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("NumeroCasa");
+                    b.Property<string>("Complement")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("PontoDoacaoId")
+                    b.Property<int>("DonationPointId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("HouseNumber")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("VoluntariadoId")
+                    b.Property<int>("InstituteId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Neighborhood")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ZipCode")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstitutoId")
-                        .IsUnique();
-
-                    b.HasIndex("PontoDoacaoId")
-                        .IsUnique();
-
-                    b.HasIndex("UsuarioId");
-
-                    b.HasIndex("VoluntariadoId");
-
-                    b.ToTable("Enderecos", (string)null);
+                    b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Instituto", b =>
+            modelBuilder.Entity("Domain.Entities.Benefit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Descricao")
+                    b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Perfil")
+                    b.Property<int?>("VolunteeringId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Institutos");
+                    b.HasIndex("VolunteeringId");
+
+                    b.ToTable("Benefits");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Login", b =>
+            modelBuilder.Entity("Domain.Entities.DonationMaterial", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("InstitutoId")
+                    b.Property<int?>("DonationPointId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("SenhaHash")
+                    b.Property<int?>("InstituteId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("TypeMaterial")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstitutoId");
+                    b.HasIndex("DonationPointId");
 
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
+                    b.HasIndex("InstituteId");
 
-                    b.ToTable("Logins");
+                    b.ToTable("DonationMaterials");
                 });
 
-            modelBuilder.Entity("Domain.Entities.MaterialDoacao", b =>
+            modelBuilder.Entity("Domain.Entities.DonationPoint", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("InstitutoId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PontoDoacaoId")
+                    b.Property<int?>("InstituteId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Tipo")
+                    b.Property<int>("TypeMaterial")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstitutoId");
+                    b.HasIndex("AddressId");
 
-                    b.HasIndex("PontoDoacaoId");
+                    b.HasIndex("InstituteId");
 
-                    b.ToTable("MaterialDoacaos");
+                    b.ToTable("DonationPoints");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PontoDoacao", b =>
+            modelBuilder.Entity("Domain.Entities.Institute", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("InstitutoId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MateriasAceito")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("NomeLocal")
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProfileAcess")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstitutoId");
+                    b.HasIndex("AddressId");
 
-                    b.ToTable("PontoDoacaos");
+                    b.ToTable("Institutes");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Usuario", b =>
+            modelBuilder.Entity("Domain.Entities.Responsibility", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("Id");
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("VolunteeringId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VolunteeringId");
+
+                    b.ToTable("Responsibilities");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CPF")
                         .HasColumnType("TEXT");
@@ -190,240 +199,187 @@ namespace Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Nome");
-
-                    b.Property<int>("Perfil")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SenhaHash")
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SobreNome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("SobreNome");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProfileAcess")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Surname")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios", (string)null);
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Voluntariado", b =>
+            modelBuilder.Entity("Domain.Entities.Volunteering", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("Id");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(800)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Descricao");
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Titulo");
+                    b.Property<int?>("InstituteId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Voluntariados", (string)null);
+                    b.HasIndex("InstituteId");
+
+                    b.ToTable("Volunteerings");
                 });
 
-            modelBuilder.Entity("VoluntariadoUsuario", b =>
+            modelBuilder.Entity("Domain.Services.Login", b =>
                 {
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("VoluntariadoId")
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("UsuarioId", "VoluntariadoId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("VoluntariadoId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.ToTable("VoluntariadoUsuarios", (string)null);
+                    b.ToTable("Login");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Endereco", b =>
+            modelBuilder.Entity("AddressUser", b =>
                 {
-                    b.HasOne("Domain.Entities.Instituto", "Instituto")
-                        .WithOne("Endereco")
-                        .HasForeignKey("Domain.Entities.Endereco", "InstitutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.PontoDoacao", "PontoDoacao")
-                        .WithOne("Endereco")
-                        .HasForeignKey("Domain.Entities.Endereco", "PontoDoacaoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Usuario", "Usuario")
-                        .WithMany("Enderecos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Voluntariado", "Voluntariado")
+                    b.HasOne("Domain.Entities.Address", null)
                         .WithMany()
-                        .HasForeignKey("VoluntariadoId")
+                        .HasForeignKey("AddressesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Instituto");
-
-                    b.Navigation("PontoDoacao");
-
-                    b.Navigation("Usuario");
-
-                    b.Navigation("Voluntariado");
+                    b.HasOne("Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Login", b =>
+            modelBuilder.Entity("Domain.Entities.Benefit", b =>
                 {
-                    b.HasOne("Domain.Entities.Instituto", "Instituto")
-                        .WithMany()
-                        .HasForeignKey("InstitutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Domain.Entities.Volunteering", "Volunteering")
+                        .WithMany("Benefits")
+                        .HasForeignKey("VolunteeringId");
 
-                    b.HasOne("Domain.Entities.Usuario", "Usuario")
+                    b.Navigation("Volunteering");
+                });
+
+            modelBuilder.Entity("Domain.Entities.DonationMaterial", b =>
+                {
+                    b.HasOne("Domain.Entities.DonationPoint", "DonationPoint")
+                        .WithMany()
+                        .HasForeignKey("DonationPointId");
+
+                    b.HasOne("Domain.Entities.Institute", "Institute")
+                        .WithMany("DonationMaterials")
+                        .HasForeignKey("InstituteId");
+
+                    b.Navigation("DonationPoint");
+
+                    b.Navigation("Institute");
+                });
+
+            modelBuilder.Entity("Domain.Entities.DonationPoint", b =>
+                {
+                    b.HasOne("Domain.Entities.Address", "Address")
+                        .WithMany("DonationPoints")
+                        .HasForeignKey("AddressId");
+
+                    b.HasOne("Domain.Entities.Institute", "Institute")
+                        .WithMany()
+                        .HasForeignKey("InstituteId");
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Institute");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Institute", b =>
+                {
+                    b.HasOne("Domain.Entities.Address", "Address")
+                        .WithMany("Institutes")
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Responsibility", b =>
+                {
+                    b.HasOne("Domain.Entities.Volunteering", "Volunteering")
+                        .WithMany("Responsibility")
+                        .HasForeignKey("VolunteeringId");
+
+                    b.Navigation("Volunteering");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Volunteering", b =>
+                {
+                    b.HasOne("Domain.Entities.Institute", "Institute")
+                        .WithMany("Volunteerings")
+                        .HasForeignKey("InstituteId");
+
+                    b.Navigation("Institute");
+                });
+
+            modelBuilder.Entity("Domain.Services.Login", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "User")
                         .WithOne("Login")
-                        .HasForeignKey("Domain.Entities.Login", "UsuarioId")
+                        .HasForeignKey("Domain.Services.Login", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Instituto");
-
-                    b.Navigation("Usuario");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.MaterialDoacao", b =>
+            modelBuilder.Entity("Domain.Entities.Address", b =>
                 {
-                    b.HasOne("Domain.Entities.Instituto", "Instituto")
-                        .WithMany("MateriasDoacao")
-                        .HasForeignKey("InstitutoId");
+                    b.Navigation("DonationPoints");
 
-                    b.HasOne("Domain.Entities.PontoDoacao", "PontoDoacao")
-                        .WithMany()
-                        .HasForeignKey("PontoDoacaoId");
-
-                    b.Navigation("Instituto");
-
-                    b.Navigation("PontoDoacao");
+                    b.Navigation("Institutes");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PontoDoacao", b =>
+            modelBuilder.Entity("Domain.Entities.Institute", b =>
                 {
-                    b.HasOne("Domain.Entities.Instituto", "Instituto")
-                        .WithMany()
-                        .HasForeignKey("InstitutoId");
+                    b.Navigation("DonationMaterials");
 
-                    b.Navigation("Instituto");
+                    b.Navigation("Volunteerings");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Voluntariado", b =>
+            modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.HasOne("Domain.Entities.Instituto", "Instituto")
-                        .WithMany("Voluntariados")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsMany("Domain.Services.VoluntariadoBeneficio", "Beneficios", b1 =>
-                        {
-                            b1.Property<string>("Beneficio")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT")
-                                .HasColumnName("Beneficio");
-
-                            b1.Property<int>("VoluntariadoId")
-                                .HasColumnType("INTEGER");
-
-                            b1.HasKey("Beneficio");
-
-                            b1.HasIndex("VoluntariadoId");
-
-                            b1.ToTable("VoluntariadoBeneficios", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("VoluntariadoId");
-                        });
-
-                    b.OwnsMany("Domain.Services.VoluntariadoResponsabilidade", "Responsabilidade", b1 =>
-                        {
-                            b1.Property<string>("Responsabilidade")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT")
-                                .HasColumnName("Responsabilidade");
-
-                            b1.Property<int>("VoluntariadoId")
-                                .HasColumnType("INTEGER");
-
-                            b1.HasKey("Responsabilidade");
-
-                            b1.HasIndex("VoluntariadoId");
-
-                            b1.ToTable("VoluntariadoResponsabilidades", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("VoluntariadoId");
-                        });
-
-                    b.Navigation("Beneficios");
-
-                    b.Navigation("Instituto");
-
-                    b.Navigation("Responsabilidade");
-                });
-
-            modelBuilder.Entity("VoluntariadoUsuario", b =>
-                {
-                    b.HasOne("Domain.Entities.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_VoluntariadoUsuario_Usuario_UsuarioId");
-
-                    b.HasOne("Domain.Entities.Voluntariado", null)
-                        .WithMany()
-                        .HasForeignKey("VoluntariadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_VoluntariadoUsuario_Voluntariado_VoluntariadoId");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Instituto", b =>
-                {
-                    b.Navigation("Endereco");
-
-                    b.Navigation("MateriasDoacao");
-
-                    b.Navigation("Voluntariados");
-                });
-
-            modelBuilder.Entity("Domain.Entities.PontoDoacao", b =>
-                {
-                    b.Navigation("Endereco");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Usuario", b =>
-                {
-                    b.Navigation("Enderecos");
-
                     b.Navigation("Login");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Volunteering", b =>
+                {
+                    b.Navigation("Benefits");
+
+                    b.Navigation("Responsibility");
                 });
 #pragma warning restore 612, 618
         }

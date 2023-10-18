@@ -1,4 +1,4 @@
-using Data.Types;
+using System.Runtime.CompilerServices;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,23 +17,19 @@ namespace Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseSqlite($"Data Source = {DbPath}");
-    
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Instituto> Institutos { get; set; }
-        public DbSet<Voluntariado> Voluntariados { get; set; }
-        public DbSet<PontoDoacao> PontoDoacaos { get; set;}
-        public DbSet<MaterialDoacao> MaterialDoacaos { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<Login> Logins { get; set; }
 
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new UsuarioMap());
-            modelBuilder.ApplyConfiguration(new EnderecoMap());
-            modelBuilder.ApplyConfiguration(new VoluntariadoMap());
-            // modelBuilder.ApplyConfiguration(new MaterialDoacaoMap());
-            // modelBuilder.ApplyConfiguration(new InstitutoMap());
-        }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Benefit> Benefits { get; set; }
+        public DbSet<Responsibility> Responsibilities { get; set; }
+        public DbSet<DonationMaterial> DonationMaterials { get; set; }
+        public DbSet<DonationPoint> DonationPoints { get; set; }
+        public DbSet<Volunteering> Volunteerings { get; set; }
+        public DbSet<Institute> Institutes { get; set; }
+ 
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     base.OnModelCreating(modelBuilder);
+        // }
     }
 }

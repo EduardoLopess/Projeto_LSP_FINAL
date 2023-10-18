@@ -8,18 +8,15 @@ namespace api.Configuration
     {
         public AutoMapperConfigViewModels()
         {
-            CreateMap<UsuarioViewModel, Usuario>()
-                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
-                .ForMember(dest => dest.SobreNome, opt => opt.MapFrom(src => src.SobreNome))
-                .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Telefone))
+            CreateMap<UserViewModel, User>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname))
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
                 .ForMember(dest => dest.CPF, opt => opt.MapFrom(src => src.CPF))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
-                .ForMember(dest => dest.Enderecos, opt => opt.MapFrom(src => src.EnderecoViews)); // Mapeamento da lista de endereços
+                .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.AdressViewModels));
 
-            
-            CreateMap<EnderecoViewModel, Endereco>();
-                
-            
+            CreateMap<AdressViewModel, Address>();
         }
     }
 }

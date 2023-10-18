@@ -4,12 +4,9 @@ namespace Domain.DTOs
     {
         public int Id { get; set; }
         public string Email { get; set; }
-        public string SenhaHash { get; set; }
+        public string PasswordHash { get; set; }
 
-        //public UsuarioDTO UsuarioDTO { get; set; }
-        public int UsuarioId { get; set; }
-
-        //public Instituto Instituto { get; set; }
-        public int InstitutoId { get; set; }
+        //public User User { get; set; }
+        public int UserId { get; set; }
     }
 }
