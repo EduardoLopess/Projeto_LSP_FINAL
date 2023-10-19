@@ -37,14 +37,32 @@ namespace Data.Repository
                     .FirstOrDefaultAsync(i => i.Id == entityId);
         }
 
-        public Task UpdateAsync(Institute entity)
+        public async Task UpdateAsync(Institute entity)
         {
-            throw new NotImplementedException();
+            var existInstitute = await _context.Institutes
+                                .Include(v => v.Volunteerings)
+                                .Include(a => a.Address)
+                                .FirstOrDefaultAsync(i => i.Id == entity.Id);
+            if(existInstitute != null)
+            {
+                _context.Entry(existInstitute).CurrentValues.SetValues(entity);
+                await
+                    _context.SaveChangesAsync();
+            }
         }
 
-        public Task DeleteAsync(int entityId)
+        public async Task DeleteAsync(int entityId)
         {
-            throw new NotImplementedException();
+            var existInstitute = await _context.Institutes
+                                .Include(v => v.Volunteerings)
+                                .Include(a => a.Address)
+                                .FirstOrDefaultAsync(i => i.Id == entityId);
+            if(existInstitute != null)
+            {
+                _context.Institutes.Remove(existInstitute);
+                await
+                    _context.SaveChangesAsync();
+            }
         }
 
     }
